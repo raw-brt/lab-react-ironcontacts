@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import ContactRow from './ContactRow';
+import Button from 'react-bootstrap/Button';
 
 class ContactList extends Component {
   constructor(props) {
@@ -11,8 +12,11 @@ class ContactList extends Component {
     }
 
   onClickRandomContact = () => {
+    // Store all the elements not selected in the 5 element previous array in remainingContacts
     const remainingContacts = this.state.allContacts.filter(contact => !this.state.contacts.some(contact => contact === contact));
+    // Return a random contact from remainingContacts
     const randomContact = remainingContacts[Math.floor(Math.random() * remainingContacts.length)];
+    // Modify the state by updating the contacts property with the previous contacts + a random new one
     if (randomContact) {
       this.setState({contacts: [...this.state.contacts, randomContact]})
     }
@@ -45,7 +49,7 @@ class ContactList extends Component {
       const Buttons = () => {
         return (
           <div className="btn-group mb-4" role="group" aria-label="example">
-            <button type="button" className="btn btn-secondary" onClick={this.onClickRandomContact}>+</button>
+            <Button variant="primary" className="add-button" onClick={this.onClickRandomContact()}>Add random contact</Button>
           </div>
         )
       }
